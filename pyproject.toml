@@ -24,9 +24,11 @@ classifiers = [
 dependencies = [
     "pypdf>=5.0",
     "python-docx>=1.1",
+    "rapidfuzz>=3.9",
 ]
 
 [project.optional-dependencies]
+embeddings = ["sentence-transformers>=3.0"]
 dev = [
     "mypy>=1.10",
     "pre-commit>=3.7",
@@ -43,7 +45,7 @@ Issues = "https://github.com/mzhyhan/cv-job-matcher/issues"
 include = ["cv_matcher*"]
 
 [tool.setuptools.package-data]
-cv_matcher = ["py.typed"]
+cv_matcher = ["py.typed", "data/*.json"]
 
 [tool.ruff]
 line-length = 100

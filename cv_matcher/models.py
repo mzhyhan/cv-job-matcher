@@ -11,6 +11,8 @@ __all__ = [
     "EmptyDocumentError",
     "LoadError",
     "LoadedDocument",
+    "Skill",
+    "SkillHit",
     "SourceFormat",
     "UnsupportedFormatError",
 ]
@@ -84,3 +86,46 @@ class LoadedDocument:
         """Fill ``character_count`` when the caller does not set it."""
         if not self.character_count:
             object.__setattr__(self, "character_count", len(self.text))
+
+
+@dataclass(frozen=True)
+class Skill:
+    """A skill from the curated taxonomy.
+
+    Attributes:
+        name: Canonical skill name, for example ``"PostgreSQL"``.
+        category: Broad group such as ``"language"``, ``"ml"`` or ``"cloud"``.
+        aliases: Alternative spellings that map to the canonical name.
+        ambiguous: ``True`` for names that are also common words or letters
+            (``"R"``, ``"Go"``); these are matched case-sensitively and with
+            stricter boundaries.
+    """
+
+    name: str
+    category: str
+    aliases: tuple[str, ...] = ()
+    ambiguous: bool = False
+
+
+@dataclass(frozen=True)
+class SkillHit:
+    """A skill found in a piece of text.
+
+    Attributes:
+        name: Canonical skill name.
+        category: Taxonomy category of the skill.
+        confidence: Match confidence in ``(0, 1]``; ``1.0`` for an exact
+            canonical name, slightly lower for aliases, ambiguous names and
+            fuzzy matches.
+        matched_text: The surface form as written in the text.
+        alias: The taxonomy name or alias that matched.
+        method: How the hit was found: ``"exact"``, ``"alias"``,
+            ``"normalised"`` (punctuation or spacing variant) or ``"fuzzy"``.
+    """
+
+    name: str
+    category: str
+    confidence: float
+    matched_text: str
+    alias: str
+    method: str

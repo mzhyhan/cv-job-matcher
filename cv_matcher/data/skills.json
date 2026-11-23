@@ -1,0 +1,981 @@
+{
+ "version": 1,
+ "skills": [
+  {
+   "name": "Python",
+   "category": "language",
+   "aliases": [
+    "Python3",
+    "Python 3"
+   ]
+  },
+  {
+   "name": "TypeScript",
+   "category": "language",
+   "aliases": [
+    "TS"
+   ]
+  },
+  {
+   "name": "JavaScript",
+   "category": "language",
+   "aliases": [
+    "JS",
+    "ECMAScript"
+   ]
+  },
+  {
+   "name": "Java",
+   "category": "language",
+   "aliases": []
+  },
+  {
+   "name": "Go",
+   "category": "language",
+   "aliases": [
+    "Golang"
+   ],
+   "ambiguous": true
+  },
+  {
+   "name": "Rust",
+   "category": "language",
+   "aliases": []
+  },
+  {
+   "name": "C++",
+   "category": "language",
+   "aliases": [
+    "CPP"
+   ]
+  },
+  {
+   "name": "C#",
+   "category": "language",
+   "aliases": [
+    "C Sharp",
+    "CSharp"
+   ]
+  },
+  {
+   "name": "C",
+   "category": "language",
+   "aliases": [],
+   "ambiguous": true
+  },
+  {
+   "name": "R",
+   "category": "language",
+   "aliases": [],
+   "ambiguous": true
+  },
+  {
+   "name": "Scala",
+   "category": "language",
+   "aliases": []
+  },
+  {
+   "name": "Kotlin",
+   "category": "language",
+   "aliases": []
+  },
+  {
+   "name": "Swift",
+   "category": "language",
+   "aliases": [],
+   "ambiguous": true
+  },
+  {
+   "name": "Ruby",
+   "category": "language",
+   "aliases": []
+  },
+  {
+   "name": "PHP",
+   "category": "language",
+   "aliases": []
+  },
+  {
+   "name": "Julia",
+   "category": "language",
+   "aliases": [],
+   "ambiguous": true
+  },
+  {
+   "name": "Bash",
+   "category": "language",
+   "aliases": [
+    "Shell scripting",
+    "Shell script"
+   ]
+  },
+  {
+   "name": "SQL",
+   "category": "language",
+   "aliases": [
+    "Structured Query Language"
+   ]
+  },
+  {
+   "name": "Machine Learning",
+   "category": "ml",
+   "aliases": [
+    "ML"
+   ]
+  },
+  {
+   "name": "Deep Learning",
+   "category": "ml",
+   "aliases": []
+  },
+  {
+   "name": "Natural Language Processing",
+   "category": "ml",
+   "aliases": [
+    "NLP"
+   ]
+  },
+  {
+   "name": "Computer Vision",
+   "category": "ml",
+   "aliases": []
+  },
+  {
+   "name": "Large Language Models",
+   "category": "ml",
+   "aliases": [
+    "LLM",
+    "LLMs"
+   ]
+  },
+  {
+   "name": "Generative AI",
+   "category": "ml",
+   "aliases": [
+    "GenAI",
+    "Gen AI"
+   ]
+  },
+  {
+   "name": "PyTorch",
+   "category": "ml",
+   "aliases": [
+    "torch"
+   ]
+  },
+  {
+   "name": "TensorFlow",
+   "category": "ml",
+   "aliases": []
+  },
+  {
+   "name": "Keras",
+   "category": "ml",
+   "aliases": []
+  },
+  {
+   "name": "scikit-learn",
+   "category": "ml",
+   "aliases": [
+    "sklearn",
+    "scikit learn",
+    "sci-kit learn"
+   ]
+  },
+  {
+   "name": "Hugging Face",
+   "category": "ml",
+   "aliases": [
+    "HuggingFace"
+   ]
+  },
+  {
+   "name": "Transformers",
+   "category": "ml",
+   "aliases": [
+    "Transformer models"
+   ]
+  },
+  {
+   "name": "spaCy",
+   "category": "ml",
+   "aliases": []
+  },
+  {
+   "name": "NLTK",
+   "category": "ml",
+   "aliases": []
+  },
+  {
+   "name": "LangChain",
+   "category": "ml",
+   "aliases": []
+  },
+  {
+   "name": "LlamaIndex",
+   "category": "ml",
+   "aliases": []
+  },
+  {
+   "name": "RAG",
+   "category": "ml",
+   "aliases": [
+    "Retrieval-Augmented Generation",
+    "Retrieval Augmented Generation"
+   ]
+  },
+  {
+   "name": "Embeddings",
+   "category": "ml",
+   "aliases": [
+    "Vector embeddings",
+    "Sentence embeddings"
+   ]
+  },
+  {
+   "name": "Vector Databases",
+   "category": "ml",
+   "aliases": [
+    "Vector database",
+    "Vector search"
+   ]
+  },
+  {
+   "name": "Prompt Engineering",
+   "category": "ml",
+   "aliases": []
+  },
+  {
+   "name": "Fine-tuning",
+   "category": "ml",
+   "aliases": [
+    "Finetuning",
+    "Model fine-tuning"
+   ]
+  },
+  {
+   "name": "MLOps",
+   "category": "ml",
+   "aliases": []
+  },
+  {
+   "name": "MLflow",
+   "category": "ml",
+   "aliases": []
+  },
+  {
+   "name": "Reinforcement Learning",
+   "category": "ml",
+   "aliases": []
+  },
+  {
+   "name": "OpenCV",
+   "category": "ml",
+   "aliases": []
+  },
+  {
+   "name": "XGBoost",
+   "category": "ml",
+   "aliases": []
+  },
+  {
+   "name": "LightGBM",
+   "category": "ml",
+   "aliases": []
+  },
+  {
+   "name": "ONNX",
+   "category": "ml",
+   "aliases": []
+  },
+  {
+   "name": "Tesseract",
+   "category": "ml",
+   "aliases": [
+    "Tesseract OCR"
+   ]
+  },
+  {
+   "name": "OCR",
+   "category": "ml",
+   "aliases": [
+    "Optical Character Recognition"
+   ]
+  },
+  {
+   "name": "Speech Recognition",
+   "category": "ml",
+   "aliases": [
+    "ASR"
+   ]
+  },
+  {
+   "name": "Recommender Systems",
+   "category": "ml",
+   "aliases": [
+    "Recommendation Systems"
+   ]
+  },
+  {
+   "name": "Time Series Forecasting",
+   "category": "ml",
+   "aliases": [
+    "Time series analysis"
+   ]
+  },
+  {
+   "name": "Statistics",
+   "category": "ml",
+   "aliases": [
+    "Statistical analysis"
+   ]
+  },
+  {
+   "name": "A/B Testing",
+   "category": "ml",
+   "aliases": [
+    "AB testing"
+   ]
+  },
+  {
+   "name": "Model Deployment",
+   "category": "ml",
+   "aliases": [
+    "Model serving"
+   ]
+  },
+  {
+   "name": "Feature Engineering",
+   "category": "ml",
+   "aliases": []
+  },
+  {
+   "name": "Weights & Biases",
+   "category": "ml",
+   "aliases": [
+    "WandB",
+    "W&B"
+   ]
+  },
+  {
+   "name": "Jupyter",
+   "category": "ml",
+   "aliases": [
+    "Jupyter Notebook",
+    "JupyterLab"
+   ]
+  },
+  {
+   "name": "OpenAI API",
+   "category": "ml",
+   "aliases": [
+    "OpenAI",
+    "GPT"
+   ]
+  },
+  {
+   "name": "FastAPI",
+   "category": "web",
+   "aliases": []
+  },
+  {
+   "name": "Django",
+   "category": "web",
+   "aliases": []
+  },
+  {
+   "name": "Flask",
+   "category": "web",
+   "aliases": []
+  },
+  {
+   "name": "REST APIs",
+   "category": "web",
+   "aliases": [
+    "REST API",
+    "RESTful",
+    "RESTful APIs"
+   ]
+  },
+  {
+   "name": "GraphQL",
+   "category": "web",
+   "aliases": []
+  },
+  {
+   "name": "gRPC",
+   "category": "web",
+   "aliases": []
+  },
+  {
+   "name": "React",
+   "category": "web",
+   "aliases": [
+    "React.js",
+    "ReactJS",
+    "React JS"
+   ]
+  },
+  {
+   "name": "Next.js",
+   "category": "web",
+   "aliases": [
+    "NextJS",
+    "Next JS"
+   ]
+  },
+  {
+   "name": "Vue.js",
+   "category": "web",
+   "aliases": [
+    "Vue",
+    "VueJS",
+    "Vue JS"
+   ]
+  },
+  {
+   "name": "Angular",
+   "category": "web",
+   "aliases": []
+  },
+  {
+   "name": "Node.js",
+   "category": "web",
+   "aliases": [
+    "NodeJS",
+    "Node JS",
+    "Node"
+   ]
+  },
+  {
+   "name": "Express.js",
+   "category": "web",
+   "aliases": [
+    "ExpressJS",
+    "Express JS"
+   ]
+  },
+  {
+   "name": "Spring Boot",
+   "category": "web",
+   "aliases": [
+    "Spring Framework"
+   ]
+  },
+  {
+   "name": "HTML",
+   "category": "web",
+   "aliases": [
+    "HTML5"
+   ]
+  },
+  {
+   "name": "CSS",
+   "category": "web",
+   "aliases": [
+    "CSS3"
+   ]
+  },
+  {
+   "name": "Tailwind CSS",
+   "category": "web",
+   "aliases": [
+    "Tailwind"
+   ]
+  },
+  {
+   "name": "Pydantic",
+   "category": "web",
+   "aliases": []
+  },
+  {
+   "name": "Streamlit",
+   "category": "web",
+   "aliases": []
+  },
+  {
+   "name": "Gradio",
+   "category": "web",
+   "aliases": []
+  },
+  {
+   "name": "WebSockets",
+   "category": "web",
+   "aliases": [
+    "WebSocket"
+   ]
+  },
+  {
+   "name": "ASP.NET",
+   "category": "web",
+   "aliases": [
+    "ASP.NET Core"
+   ]
+  },
+  {
+   "name": ".NET",
+   "category": "web",
+   "aliases": [
+    "dotnet",
+    ".NET Core"
+   ]
+  },
+  {
+   "name": "Microservices",
+   "category": "web",
+   "aliases": [
+    "Microservice architecture"
+   ]
+  },
+  {
+   "name": "PostgreSQL",
+   "category": "data",
+   "aliases": [
+    "Postgres",
+    "PSQL"
+   ]
+  },
+  {
+   "name": "MySQL",
+   "category": "data",
+   "aliases": []
+  },
+  {
+   "name": "SQLite",
+   "category": "data",
+   "aliases": []
+  },
+  {
+   "name": "MongoDB",
+   "category": "data",
+   "aliases": [
+    "Mongo"
+   ]
+  },
+  {
+   "name": "Redis",
+   "category": "data",
+   "aliases": []
+  },
+  {
+   "name": "Elasticsearch",
+   "category": "data",
+   "aliases": [
+    "OpenSearch"
+   ]
+  },
+  {
+   "name": "Pandas",
+   "category": "data",
+   "aliases": []
+  },
+  {
+   "name": "NumPy",
+   "category": "data",
+   "aliases": []
+  },
+  {
+   "name": "SciPy",
+   "category": "data",
+   "aliases": []
+  },
+  {
+   "name": "Polars",
+   "category": "data",
+   "aliases": []
+  },
+  {
+   "name": "Apache Spark",
+   "category": "data",
+   "aliases": [
+    "Spark",
+    "PySpark"
+   ]
+  },
+  {
+   "name": "Apache Kafka",
+   "category": "data",
+   "aliases": [
+    "Kafka"
+   ]
+  },
+  {
+   "name": "Apache Airflow",
+   "category": "data",
+   "aliases": [
+    "Airflow"
+   ]
+  },
+  {
+   "name": "dbt",
+   "category": "data",
+   "aliases": [
+    "data build tool"
+   ]
+  },
+  {
+   "name": "ETL",
+   "category": "data",
+   "aliases": [
+    "ELT",
+    "ETL pipelines",
+    "Data pipelines"
+   ]
+  },
+  {
+   "name": "Data Engineering",
+   "category": "data",
+   "aliases": []
+  },
+  {
+   "name": "Data Analysis",
+   "category": "data",
+   "aliases": [
+    "Data analytics"
+   ]
+  },
+  {
+   "name": "Data Visualisation",
+   "category": "data",
+   "aliases": [
+    "Data Visualization",
+    "Matplotlib"
+   ]
+  },
+  {
+   "name": "Snowflake",
+   "category": "data",
+   "aliases": []
+  },
+  {
+   "name": "BigQuery",
+   "category": "data",
+   "aliases": []
+  },
+  {
+   "name": "Databricks",
+   "category": "data",
+   "aliases": []
+  },
+  {
+   "name": "SQLAlchemy",
+   "category": "data",
+   "aliases": []
+  },
+  {
+   "name": "Pinecone",
+   "category": "data",
+   "aliases": []
+  },
+  {
+   "name": "FAISS",
+   "category": "data",
+   "aliases": []
+  },
+  {
+   "name": "Tableau",
+   "category": "data",
+   "aliases": []
+  },
+  {
+   "name": "Power BI",
+   "category": "data",
+   "aliases": [
+    "PowerBI"
+   ]
+  },
+  {
+   "name": "AWS",
+   "category": "cloud",
+   "aliases": [
+    "Amazon Web Services"
+   ]
+  },
+  {
+   "name": "Azure",
+   "category": "cloud",
+   "aliases": [
+    "Microsoft Azure"
+   ]
+  },
+  {
+   "name": "GCP",
+   "category": "cloud",
+   "aliases": [
+    "Google Cloud",
+    "Google Cloud Platform"
+   ]
+  },
+  {
+   "name": "AWS Lambda",
+   "category": "cloud",
+   "aliases": [
+    "Lambda functions"
+   ]
+  },
+  {
+   "name": "Amazon S3",
+   "category": "cloud",
+   "aliases": [
+    "S3"
+   ]
+  },
+  {
+   "name": "SageMaker",
+   "category": "cloud",
+   "aliases": [
+    "AWS SageMaker"
+   ]
+  },
+  {
+   "name": "Serverless",
+   "category": "cloud",
+   "aliases": []
+  },
+  {
+   "name": "Docker",
+   "category": "devops",
+   "aliases": [
+    "Dockerfile",
+    "Containers",
+    "Containerisation",
+    "Containerization"
+   ]
+  },
+  {
+   "name": "Kubernetes",
+   "category": "devops",
+   "aliases": [
+    "k8s"
+   ]
+  },
+  {
+   "name": "Terraform",
+   "category": "devops",
+   "aliases": []
+  },
+  {
+   "name": "Ansible",
+   "category": "devops",
+   "aliases": []
+  },
+  {
+   "name": "CI/CD",
+   "category": "devops",
+   "aliases": [
+    "Continuous Integration",
+    "Continuous Delivery",
+    "Continuous Deployment",
+    "CI-CD",
+    "CICD"
+   ]
+  },
+  {
+   "name": "GitHub Actions",
+   "category": "devops",
+   "aliases": []
+  },
+  {
+   "name": "GitLab CI",
+   "category": "devops",
+   "aliases": [
+    "GitLab CI/CD"
+   ]
+  },
+  {
+   "name": "Jenkins",
+   "category": "devops",
+   "aliases": []
+  },
+  {
+   "name": "Linux",
+   "category": "devops",
+   "aliases": [
+    "Unix"
+   ]
+  },
+  {
+   "name": "Prometheus",
+   "category": "devops",
+   "aliases": []
+  },
+  {
+   "name": "Grafana",
+   "category": "devops",
+   "aliases": []
+  },
+  {
+   "name": "Helm",
+   "category": "devops",
+   "aliases": []
+  },
+  {
+   "name": "Infrastructure as Code",
+   "category": "devops",
+   "aliases": [
+    "IaC"
+   ]
+  },
+  {
+   "name": "Observability",
+   "category": "devops",
+   "aliases": [
+    "Monitoring and logging"
+   ]
+  },
+  {
+   "name": "Nginx",
+   "category": "devops",
+   "aliases": []
+  },
+  {
+   "name": "Git",
+   "category": "tooling",
+   "aliases": [
+    "Version control"
+   ]
+  },
+  {
+   "name": "GitHub",
+   "category": "tooling",
+   "aliases": []
+  },
+  {
+   "name": "GitLab",
+   "category": "tooling",
+   "aliases": []
+  },
+  {
+   "name": "Jira",
+   "category": "tooling",
+   "aliases": []
+  },
+  {
+   "name": "pytest",
+   "category": "tooling",
+   "aliases": [
+    "Unit testing",
+    "Unit tests"
+   ]
+  },
+  {
+   "name": "Test-Driven Development",
+   "category": "tooling",
+   "aliases": [
+    "TDD"
+   ]
+  },
+  {
+   "name": "Ruff",
+   "category": "tooling",
+   "aliases": []
+  },
+  {
+   "name": "mypy",
+   "category": "tooling",
+   "aliases": [
+    "Static typing",
+    "Type hints"
+   ]
+  },
+  {
+   "name": "Poetry",
+   "category": "tooling",
+   "aliases": []
+  },
+  {
+   "name": "pip",
+   "category": "tooling",
+   "aliases": []
+  },
+  {
+   "name": "Pre-commit",
+   "category": "tooling",
+   "aliases": []
+  },
+  {
+   "name": "Postman",
+   "category": "tooling",
+   "aliases": []
+  },
+  {
+   "name": "VS Code",
+   "category": "tooling",
+   "aliases": [
+    "Visual Studio Code"
+   ]
+  },
+  {
+   "name": "Agile",
+   "category": "practice",
+   "aliases": [
+    "Agile methodologies"
+   ]
+  },
+  {
+   "name": "Scrum",
+   "category": "practice",
+   "aliases": []
+  },
+  {
+   "name": "Code Review",
+   "category": "practice",
+   "aliases": [
+    "Code reviews"
+   ]
+  },
+  {
+   "name": "System Design",
+   "category": "practice",
+   "aliases": [
+    "Software architecture"
+   ]
+  },
+  {
+   "name": "Object-Oriented Programming",
+   "category": "practice",
+   "aliases": [
+    "OOP"
+   ]
+  },
+  {
+   "name": "Design Patterns",
+   "category": "practice",
+   "aliases": []
+  },
+  {
+   "name": "Data Structures and Algorithms",
+   "category": "practice",
+   "aliases": [
+    "Algorithms"
+   ]
+  },
+  {
+   "name": "Technical Documentation",
+   "category": "practice",
+   "aliases": []
+  },
+  {
+   "name": "Asynchronous Programming",
+   "category": "practice",
+   "aliases": [
+    "asyncio",
+    "Async programming"
+   ]
+  },
+  {
+   "name": "Concurrency",
+   "category": "practice",
+   "aliases": [
+    "Multithreading"
+   ]
+  },
+  {
+   "name": "Performance Optimisation",
+   "category": "practice",
+   "aliases": [
+    "Performance Optimization"
+   ]
+  }
+ ]
+}

@@ -8,6 +8,10 @@ Public API (document loading):
     - :class:`LoadError`, :class:`UnsupportedFormatError`,
       :class:`EmptyDocumentError`.
 
+Public API (skills):
+    - :func:`extract_skills` - find taxonomy skills in text, with fuzzy matching.
+    - :func:`load_taxonomy`, :class:`Skill`, :class:`SkillHit`.
+
 Example:
     >>> import cv_matcher
     >>> cv_matcher.__version__
@@ -29,23 +33,31 @@ from cv_matcher.models import (
     EmptyDocumentError,
     LoadedDocument,
     LoadError,
+    Skill,
+    SkillHit,
     SourceFormat,
     UnsupportedFormatError,
 )
+from cv_matcher.skills import DEFAULT_FUZZY_THRESHOLD, extract_skills, load_taxonomy
 from cv_matcher.text import normalise_text
 
 __all__ = [
+    "DEFAULT_FUZZY_THRESHOLD",
     "SUPPORTED_EXTENSIONS",
     "DocumentKind",
     "EmptyDocumentError",
     "LoadError",
     "LoadedDocument",
+    "Skill",
+    "SkillHit",
     "SourceFormat",
     "UnsupportedFormatError",
     "__version__",
     "detect_format",
+    "extract_skills",
     "load_document",
     "load_from_bytes",
+    "load_taxonomy",
     "normalise_text",
 ]
 __version__ = "0.1.0"
