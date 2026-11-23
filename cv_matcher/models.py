@@ -8,6 +8,7 @@ from pathlib import Path
 
 __all__ = [
     "DocumentKind",
+    "EmbeddingsUnavailableError",
     "EmptyDocumentError",
     "LoadError",
     "LoadedDocument",
@@ -86,6 +87,14 @@ class LoadedDocument:
         """Fill ``character_count`` when the caller does not set it."""
         if not self.character_count:
             object.__setattr__(self, "character_count", len(self.text))
+
+
+class EmbeddingsUnavailableError(RuntimeError):
+    """Raised when embeddings were requested but cannot be used.
+
+    This happens when ``sentence-transformers`` is not installed (install the
+    ``embeddings`` extra) or when the model cannot be loaded.
+    """
 
 
 @dataclass(frozen=True)

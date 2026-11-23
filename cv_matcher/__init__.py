@@ -12,6 +12,11 @@ Public API (skills):
     - :func:`extract_skills` - find taxonomy skills in text, with fuzzy matching.
     - :func:`load_taxonomy`, :class:`Skill`, :class:`SkillHit`.
 
+Public API (similarity):
+    - :func:`tfidf_similarity` - dependency-free text similarity (default).
+    - :class:`SentenceTransformerEmbedder` - optional embeddings backend,
+      installed with the ``embeddings`` extra.
+
 Example:
     >>> import cv_matcher
     >>> cv_matcher.__version__
@@ -30,6 +35,7 @@ from cv_matcher.loaders import (
 )
 from cv_matcher.models import (
     DocumentKind,
+    EmbeddingsUnavailableError,
     EmptyDocumentError,
     LoadedDocument,
     LoadError,
@@ -38,27 +44,40 @@ from cv_matcher.models import (
     SourceFormat,
     UnsupportedFormatError,
 )
+from cv_matcher.similarity import (
+    DEFAULT_MODEL_NAME,
+    Embedder,
+    SentenceTransformerEmbedder,
+    cosine_similarity,
+    tfidf_similarity,
+)
 from cv_matcher.skills import DEFAULT_FUZZY_THRESHOLD, extract_skills, load_taxonomy
 from cv_matcher.text import normalise_text
 
 __all__ = [
     "DEFAULT_FUZZY_THRESHOLD",
+    "DEFAULT_MODEL_NAME",
     "SUPPORTED_EXTENSIONS",
     "DocumentKind",
+    "Embedder",
+    "EmbeddingsUnavailableError",
     "EmptyDocumentError",
     "LoadError",
     "LoadedDocument",
+    "SentenceTransformerEmbedder",
     "Skill",
     "SkillHit",
     "SourceFormat",
     "UnsupportedFormatError",
     "__version__",
+    "cosine_similarity",
     "detect_format",
     "extract_skills",
     "load_document",
     "load_from_bytes",
     "load_taxonomy",
     "normalise_text",
+    "tfidf_similarity",
 ]
 __version__ = "0.1.0"
 
