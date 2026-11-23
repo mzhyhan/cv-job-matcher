@@ -12,10 +12,13 @@ Public API (skills):
     - :func:`extract_skills` - find taxonomy skills in text, with fuzzy matching.
     - :func:`load_taxonomy`, :class:`Skill`, :class:`SkillHit`.
 
-Public API (similarity):
-    - :func:`tfidf_similarity` - dependency-free text similarity (default).
-    - :class:`SentenceTransformerEmbedder` - optional embeddings backend,
-      installed with the ``embeddings`` extra.
+Public API (scoring):
+    - :func:`match_cv` - score a CV against a job description, returning a
+      :class:`MatchResult` with skill overlap, text similarity and the overall
+      score. TF-IDF is the default fallback; embeddings need the optional
+      ``embeddings`` extra.
+    - :func:`tfidf_similarity`, :class:`SentenceTransformerEmbedder`,
+      :class:`ScoreWeights`, :class:`SkillMatch`.
 
 Example:
     >>> import cv_matcher
@@ -39,11 +42,15 @@ from cv_matcher.models import (
     EmptyDocumentError,
     LoadedDocument,
     LoadError,
+    MatchResult,
+    ScoreWeights,
     Skill,
     SkillHit,
+    SkillMatch,
     SourceFormat,
     UnsupportedFormatError,
 )
+from cv_matcher.scoring import DEFAULT_WEIGHTS, Backend, match_cv
 from cv_matcher.similarity import (
     DEFAULT_MODEL_NAME,
     Embedder,
@@ -57,16 +64,21 @@ from cv_matcher.text import normalise_text
 __all__ = [
     "DEFAULT_FUZZY_THRESHOLD",
     "DEFAULT_MODEL_NAME",
+    "DEFAULT_WEIGHTS",
     "SUPPORTED_EXTENSIONS",
+    "Backend",
     "DocumentKind",
     "Embedder",
     "EmbeddingsUnavailableError",
     "EmptyDocumentError",
     "LoadError",
     "LoadedDocument",
+    "MatchResult",
+    "ScoreWeights",
     "SentenceTransformerEmbedder",
     "Skill",
     "SkillHit",
+    "SkillMatch",
     "SourceFormat",
     "UnsupportedFormatError",
     "__version__",
@@ -76,6 +88,7 @@ __all__ = [
     "load_document",
     "load_from_bytes",
     "load_taxonomy",
+    "match_cv",
     "normalise_text",
     "tfidf_similarity",
 ]

@@ -12,8 +12,11 @@ __all__ = [
     "EmptyDocumentError",
     "LoadError",
     "LoadedDocument",
+    "MatchResult",
+    "ScoreWeights",
     "Skill",
     "SkillHit",
+    "SkillMatch",
     "SourceFormat",
     "UnsupportedFormatError",
 ]
@@ -138,3 +141,79 @@ class SkillHit:
     matched_text: str
     alias: str
     method: str
+
+
+@dataclass(frozen=True)
+class SkillMatch:
+    """A job skill that is also present on the CV.
+
+    Attributes:
+        name: Canonical skill name.
+        category: Taxonomy category of the skill.
+        cv_text: Surface form found in the CV.
+        job_text: Surface form found in the job description.
+        confidence: The lower of the CV and job match confidences.
+    """
+
+    name: str
+    category: str
+    cv_text: str
+    job_text: str
+    confidence: float
+
+
+@dataclass(frozen=True)
+class ScoreWeights:
+    """Relative weights of the skill and text-similarity scores.
+
+    The weights only need to be non-negative with a positive sum; they are
+    normalised so that they add up to one when scores are combined.
+
+    Attributes:
+        skill: Weight of the skill-overlap score.
+        text: Weight of the text-similarity score.
+
+    Raises:
+        ValueError: If a weight is negative or both weights are zero.
+    """
+
+    skill: float = 0.6
+    text: float = 0.4
+
+    def __post_init__(self) -> None:
+        """Validate the weights."""
+        if self.skill < 0 or self.text < 0:
+            raise ValueError("Weights must not be negative.")
+        if self.skill + self.text <= 0:
+            raise ValueError("At least one weight must be positive.")
+
+    def normalised(self) -> ScoreWeights:
+        """Return weights scaled so that they sum to one."""
+        total = self.skill + self.text
+        return ScoreWeights(self.skill / total, self.text / total)
+
+
+@dataclass(frozen=True)
+class MatchResult:
+    """Outcome of matching a CV against a job description.
+
+    Attributes:
+        overall_score: Weighted combination of the two scores, in ``[0, 1]``.
+        skill_score: Fraction of job skills found on the CV, in ``[0, 1]``.
+        text_score: Text similarity of the two documents, in ``[0, 1]``.
+        weights: Effective (normalised) weights used for ``overall_score``.
+            When the job lists no extractable skills the skill weight is zero.
+        backend: Text-similarity backend used: ``"tfidf"`` or ``"embeddings"``.
+        matched_skills: Job skills that also appear on the CV.
+        missing_skills: Job skills that are absent from the CV.
+        extra_skills: CV skills that the job description does not mention.
+    """
+
+    overall_score: float
+    skill_score: float
+    text_score: float
+    weights: ScoreWeights
+    backend: str
+    matched_skills: tuple[SkillMatch, ...] = ()
+    missing_skills: tuple[SkillHit, ...] = ()
+    extra_skills: tuple[SkillHit, ...] = ()
