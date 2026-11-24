@@ -37,6 +37,9 @@ dev = [
     "ruff>=0.5",
 ]
 
+[project.scripts]
+cv-match = "cv_matcher.cli:main"
+
 [project.urls]
 Homepage = "https://github.com/mzhyhan/cv-job-matcher"
 Issues = "https://github.com/mzhyhan/cv-job-matcher/issues"
@@ -73,6 +76,7 @@ addopts = "-ra --doctest-modules"
 
 [tool.coverage.run]
 source = ["cv_matcher"]
+omit = ["cv_matcher/__main__.py"]
 branch = true
 
 [tool.coverage.report]
