@@ -7,6 +7,8 @@ from enum import Enum
 from pathlib import Path
 
 __all__ = [
+    "AnalysisError",
+    "AnalysisResult",
     "DocumentKind",
     "EmbeddingsUnavailableError",
     "EmptyDocumentError",
@@ -18,6 +20,7 @@ __all__ = [
     "SkillHit",
     "SkillMatch",
     "SourceFormat",
+    "Suggestion",
     "UnsupportedFormatError",
 ]
 
@@ -217,3 +220,45 @@ class MatchResult:
     matched_skills: tuple[SkillMatch, ...] = ()
     missing_skills: tuple[SkillHit, ...] = ()
     extra_skills: tuple[SkillHit, ...] = ()
+
+
+class AnalysisError(Exception):
+    """Raised when a gap analyser cannot complete.
+
+    Typical causes are HTTP or parsing failures and a missing API key for the
+    OpenAI-compatible provider.
+    """
+
+
+@dataclass(frozen=True)
+class Suggestion:
+    """A single piece of advice for improving a CV against a job description.
+
+    Attributes:
+        title: Short headline, for example ``"Add evidence of Kubernetes"``.
+        detail: Why it matters and what to add.
+        skill: Canonical skill name if the suggestion relates to one.
+        category: One of ``"missing_skill"``, ``"emphasis"`` or ``"wording"``.
+    """
+
+    title: str
+    detail: str
+    skill: str | None = None
+    category: str = "missing_skill"
+
+
+@dataclass(frozen=True)
+class AnalysisResult:
+    """Gap analysis of a CV against a job description.
+
+    Attributes:
+        provider: Analyser that produced the result: ``"rules"`` or ``"openai"``.
+        summary: One or two sentence overview of the fit.
+        suggestions: Improvement suggestions, most important first.
+        match: The underlying match this analysis is based on.
+    """
+
+    provider: str
+    summary: str
+    suggestions: tuple[Suggestion, ...]
+    match: MatchResult

@@ -20,6 +20,14 @@ Public API (scoring):
     - :func:`tfidf_similarity`, :class:`SentenceTransformerEmbedder`,
       :class:`ScoreWeights`, :class:`SkillMatch`.
 
+Public API (gap analysis):
+    - :func:`analyse_gap` - produce a summary and improvement suggestions as an
+      :class:`AnalysisResult`. An offline :class:`RuleBasedAnalyser` is the
+      fallback; :class:`OpenAICompatibleAnalyser` uses any OpenAI-compatible
+      endpoint when an API key is set.
+    - :class:`GapAnalyser`, :data:`Provider`, :class:`Suggestion`,
+      :class:`AnalysisError`.
+
 Example:
     >>> import cv_matcher
     >>> cv_matcher.__version__
@@ -30,6 +38,13 @@ Example:
 
 import logging
 
+from cv_matcher.analysis import (
+    GapAnalyser,
+    OpenAICompatibleAnalyser,
+    Provider,
+    RuleBasedAnalyser,
+    analyse_gap,
+)
 from cv_matcher.loaders import (
     SUPPORTED_EXTENSIONS,
     detect_format,
@@ -37,6 +52,8 @@ from cv_matcher.loaders import (
     load_from_bytes,
 )
 from cv_matcher.models import (
+    AnalysisError,
+    AnalysisResult,
     DocumentKind,
     EmbeddingsUnavailableError,
     EmptyDocumentError,
@@ -48,6 +65,7 @@ from cv_matcher.models import (
     SkillHit,
     SkillMatch,
     SourceFormat,
+    Suggestion,
     UnsupportedFormatError,
 )
 from cv_matcher.scoring import DEFAULT_WEIGHTS, Backend, match_cv
@@ -66,22 +84,30 @@ __all__ = [
     "DEFAULT_MODEL_NAME",
     "DEFAULT_WEIGHTS",
     "SUPPORTED_EXTENSIONS",
+    "AnalysisError",
+    "AnalysisResult",
     "Backend",
     "DocumentKind",
     "Embedder",
     "EmbeddingsUnavailableError",
     "EmptyDocumentError",
+    "GapAnalyser",
     "LoadError",
     "LoadedDocument",
     "MatchResult",
+    "OpenAICompatibleAnalyser",
+    "Provider",
+    "RuleBasedAnalyser",
     "ScoreWeights",
     "SentenceTransformerEmbedder",
     "Skill",
     "SkillHit",
     "SkillMatch",
     "SourceFormat",
+    "Suggestion",
     "UnsupportedFormatError",
     "__version__",
+    "analyse_gap",
     "cosine_similarity",
     "detect_format",
     "extract_skills",
