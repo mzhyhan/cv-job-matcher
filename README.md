@@ -8,17 +8,18 @@ fit, and suggest targeted improvements.
 
 ## Current status
 
-**Document loading, skill extraction and match scoring are in place.** You can
-extract and normalise text from CVs and job descriptions in PDF, DOCX, TXT and
-Markdown formats, extract skills from a curated taxonomy, and compute an overall
-match score from skill overlap and text similarity. TF-IDF is the default
-similarity backend; sentence-transformers embeddings are available through the
-optional `embeddings` extra (`pip install -e ".[embeddings]"`).
+**Document loading, skill extraction, match scoring, gap analysis and the
+`cv-match` CLI are in place.** You can extract and normalise text from CVs and
+job descriptions in PDF, DOCX, TXT and Markdown formats, extract skills from a
+curated taxonomy, compute an overall match score from skill overlap and text
+similarity, and get improvement suggestions. TF-IDF is the default similarity
+backend; sentence-transformers embeddings are available through the optional
+`embeddings` extra (`pip install -e ".[embeddings]"`). Suggestions come from an
+offline rule-based analyser by default, or from any OpenAI-compatible endpoint
+when `OPENAI_API_KEY` is set.
 
 Coming next:
 
-- Gap analysis with improvement suggestions
-- A `cv-match` command-line interface
 - A small web app and API
 - Docker image and CI
 
@@ -54,8 +55,29 @@ print([m.name for m in result.matched_skills])
 print([s.name for s in result.missing_skills])
 ```
 
+```python
+from cv_matcher import analyse_gap
+
+analysis = analyse_gap(cv, job)  # rule-based unless OPENAI_API_KEY is set
+print(analysis.provider, analysis.summary)
+for suggestion in analysis.suggestions:
+    print(f"- {suggestion.title}: {suggestion.detail}")
+```
+
 `load_from_bytes` accepts in-memory file contents (for example an upload) and
 returns the same `LoadedDocument` structure.
+
+## Command line
+
+```bash
+cv-match path/to/cv.pdf path/to/job.md
+cv-match cv.pdf job.md --json --provider rules
+cv-match cv.docx job.txt --provider openai --model gpt-4o-mini -o report.txt
+```
+
+The `openai` provider reads `OPENAI_API_KEY` (and optionally `OPENAI_BASE_URL`
+and `OPENAI_MODEL`); with `--provider auto` the offline rules are used when no
+key is set.
 
 ## Development
 
