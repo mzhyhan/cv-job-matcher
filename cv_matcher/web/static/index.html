@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CV Job Matcher</title>
+  <style>
+    :root { --bg:#0f172a; --card:#1e293b; --muted:#94a3b8; --text:#e2e8f0; --accent:#38bdf8; --ok:#4ade80; --warn:#fbbf24; --bad:#f87171; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background:var(--bg); color:var(--text); }
+    header { padding:28px 32px 8px; }
+    h1 { margin:0; font-size:1.6rem; } h1 span { color:var(--accent); }
+    header p { margin:6px 0 0; color:var(--muted); }
+    main { display:grid; grid-template-columns: 1fr 1.2fr; gap:20px; padding:20px 32px 32px; }
+    @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+    .card { background:var(--card); border-radius:14px; padding:20px; }
+    .card h2 { margin:0 0 12px; font-size:1rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; }
+    .drop { display:block; border:2px dashed #475569; border-radius:12px; padding:18px; margin-bottom:14px; text-align:center; cursor:pointer; color:var(--muted); }
+    .drop:focus-within, .drop.over { border-color:var(--accent); color:var(--text); }
+    .drop strong { display:block; color:var(--text); margin-bottom:4px; }
+    .drop input { position:absolute; opacity:0; width:1px; height:1px; }
+    .drop .file { display:block; margin-top:6px; color:var(--ok); word-break:break-all; }
+    .controls { display:flex; flex-wrap:wrap; gap:12px; align-items:end; margin-top:6px; }
+    label.field { display:flex; flex-direction:column; gap:4px; font-size:.85rem; color:var(--muted); }
+    select, button { background:#0b1222; color:var(--text); border:1px solid #334155; border-radius:8px; padding:8px 12px; font-size:.95rem; }
+    button { background:var(--accent); color:#04263a; font-weight:600; border:none; cursor:pointer; }
+    button:disabled { opacity:.5; cursor:default; }
+    .score { text-align:center; padding:8px 0 16px; }
+    .score .big { font-size:4rem; font-weight:700; color:var(--accent); line-height:1; }
+    .score .label { color:var(--muted); margin-top:6px; }
+    .stats { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-bottom:14px; }
+    .pill { background:#0b1222; border-radius:999px; padding:4px 12px; font-size:.85rem; color:var(--muted); }
+    .pill b { color:var(--ok); }
+    .summary { background:#0b1222; border-radius:10px; padding:14px 16px; line-height:1.5; margin:0 0 16px; }
+    h3 { margin:16px 0 8px; font-size:.9rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; padding:0; margin:0; list-style:none; }
+    .chip { background:#0b1222; border-radius:999px; padding:4px 12px; font-size:.85rem; border:1px solid #334155; }
+    .chip.matched { color:var(--ok); border-color:var(--ok); }
+    .chip.missing { color:var(--warn); border-color:var(--warn); }
+    .chip.extra { color:var(--muted); }
+    .none { color:var(--muted); font-size:.9rem; }
+    .suggestions { padding:0; margin:0; list-style:none; display:grid; gap:10px; }
+    .suggestions li { background:#0b1222; border-radius:10px; padding:12px 14px; }
+    .suggestions strong { display:block; margin-bottom:4px; }
+    .suggestions span { color:var(--muted); font-size:.92rem; line-height:1.45; }
+    .placeholder { color:var(--muted); }
+    .error { color:var(--bad); margin-top:14px; }
+    [hidden] { display:none !important; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CV <span>Job</span> Matcher</h1>
+    <p>Upload a CV and a job description to see the match score, skill gaps and suggested improvements.</p>
+  </header>
+  <main>
+    <section class="card" aria-labelledby="input-h">
+      <h2 id="input-h">Documents</h2>
+      <label class="drop" id="drop-cv" data-label="CV">
+        <strong>CV</strong>
+        Drop a file here or click to choose (PDF, DOCX, TXT, Markdown)
+        <input type="file" id="cv" accept=".pdf,.docx,.txt,.md,.markdown" />
+        <span class="file" aria-live="polite"></span>
+      </label>
+      <label class="drop" id="drop-job" data-label="Job description">
+        <strong>Job description</strong>
+        Drop a file here or click to choose (PDF, DOCX, TXT, Markdown)
+        <input type="file" id="job" accept=".pdf,.docx,.txt,.md,.markdown" />
+        <span class="file" aria-live="polite"></span>
+      </label>
+      <div class="controls">
+        <label class="field">Similarity backend
+          <select id="backend">
+            <option value="auto" selected>auto</option>
+            <option value="tfidf">tfidf</option>
+            <option value="embeddings">embeddings</option>
+          </select>
+        </label>
+        <label class="field">Suggestions
+          <select id="provider">
+            <option value="auto" selected>auto</option>
+            <option value="rules">rules (offline)</option>
+            <option value="openai">openai</option>
+          </select>
+        </label>
+        <button id="go" type="button" disabled>Match</button>
+      </div>
+      <div id="error" class="error" role="alert" hidden></div>
+    </section>
+
+    <section class="card" aria-labelledby="result-h" aria-live="polite">
+      <h2 id="result-h">Result</h2>
+      <p id="placeholder" class="placeholder">Choose both documents and press Match.</p>
+      <div id="result" hidden>
+        <div class="score">
+          <div class="big" id="overall">0%</div>
+          <div class="label">Overall match</div>
+        </div>
+        <div class="stats">
+          <span class="pill">Skills <b id="skill">0%</b></span>
+          <span class="pill">Text <b id="text">0%</b></span>
+          <span class="pill" id="meta"></span>
+        </div>
+        <p class="summary" id="summary"></p>
+        <h3>Matched skills</h3><ul class="chips" id="matched"></ul>
+        <h3>Missing skills</h3><ul class="chips" id="missing"></ul>
+        <h3>Extra skills</h3><ul class="chips" id="extra"></ul>
+        <h3>Suggestions</h3><ul class="suggestions" id="suggestions"></ul>
+      </div>
+    </section>
+  </main>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const files = { cv: null, job: null };
+    const ACCEPT = /\.(pdf|docx|txt|md|markdown)$/i;
+
+    function refresh() { $("go").disabled = !(files.cv && files.job); }
+
+    function setFile(key, file) {
+      files[key] = file;
+      $("drop-" + key).querySelector(".file").textContent = file ? file.name : "";
+      refresh();
+    }
+
+    function wire(key) {
+      const drop = $("drop-" + key), input = $(key);
+      input.addEventListener("change", () => setFile(key, input.files[0] || null));
+      ["dragenter", "dragover"].forEach((ev) => drop.addEventListener(ev, (e) => {
+        e.preventDefault(); drop.classList.add("over");
+      }));
+      ["dragleave", "drop"].forEach((ev) => drop.addEventListener(ev, (e) => {
+        e.preventDefault(); drop.classList.remove("over");
+      }));
+      drop.addEventListener("drop", (e) => {
+        const file = e.dataTransfer.files[0];
+        if (file) setFile(key, file);
+      });
+    }
+    wire("cv"); wire("job");
+
+    const pct = (v) => Math.round(v * 100) + "%";
+
+    function fill(id, items, cls) {
+      const ul = $(id);
+      ul.replaceChildren();
+      if (!items.length) {
+        const li = document.createElement("li");
+        li.className = "none"; li.textContent = "None";
+        ul.appendChild(li);
+        return;
+      }
+      for (const s of items) {
+        const li = document.createElement("li");
+        li.className = "chip " + cls;
+        li.textContent = s.name;
+        li.title = s.category;
+        ul.appendChild(li);
+      }
+    }
+
+    function showError(msg) { $("error").textContent = msg; $("error").hidden = false; }
+
+    $("go").addEventListener("click", async () => {
+      $("error").hidden = true;
+      for (const key of ["cv", "job"]) {
+        if (!ACCEPT.test(files[key].name)) {
+          showError("Unsupported file type: " + files[key].name);
+          return;
+        }
+      }
+      const form = new FormData();
+      form.append("cv", files.cv);
+      form.append("job", files.job);
+      form.append("backend", $("backend").value);
+      form.append("provider", $("provider").value);
+      $("go").disabled = true; $("go").textContent = "Matching…";
+      try {
+        const res = await fetch("/match", { method: "POST", body: form });
+        const body = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          const d = body.detail;
+          throw new Error(typeof d === "string" ? d : d ? JSON.stringify(d) : res.statusText);
+        }
+        $("overall").textContent = pct(body.overall_score);
+        $("skill").textContent = pct(body.skill_score);
+        $("text").textContent = pct(body.text_score);
+        $("meta").textContent = body.backend + " · " + body.provider;
+        $("summary").textContent = body.summary;
+        fill("matched", body.matched_skills, "matched");
+        fill("missing", body.missing_skills, "missing");
+        fill("extra", body.extra_skills, "extra");
+        const sug = $("suggestions");
+        sug.replaceChildren();
+        for (const s of body.suggestions) {
+          const li = document.createElement("li");
+          const t = document.createElement("strong"); t.textContent = s.title;
+          const d = document.createElement("span"); d.textContent = s.detail;
+          li.append(t, d); sug.appendChild(li);
+        }
+        $("placeholder").hidden = true; $("result").hidden = false;
+      } catch (err) {
+        showError("Request failed: " + err.message);
+      } finally {
+        $("go").textContent = "Match"; refresh();
+      }
+    });
+  </script>
+</body>
+</html>

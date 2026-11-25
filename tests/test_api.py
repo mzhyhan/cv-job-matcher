@@ -20,11 +20,20 @@ OFFLINE = {"backend": "tfidf", "provider": "rules"}
 def _post(
     cv: tuple[str, bytes], job: tuple[str, bytes], data: dict[str, str] | None = None
 ) -> httpx.Response:
-    return client.post(
+    response: httpx.Response = client.post(
         "/match",
         files={"cv": cv, "job": job},
         data=OFFLINE if data is None else data,
     )
+    return response
+
+
+def test_index_serves_page() -> None:
+    response = client.get("/")
+    assert response.status_code == 200
+    assert "text/html" in response.headers["content-type"]
+    assert "CV" in response.text and "Matcher" in response.text
+    assert 'accept=".pdf,.docx,.txt,.md,.markdown"' in response.text
 
 
 def test_health() -> None:

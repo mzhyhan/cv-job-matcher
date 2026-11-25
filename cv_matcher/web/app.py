@@ -16,9 +16,11 @@ Endpoints:
 from __future__ import annotations
 
 import logging
+from importlib import resources
 from typing import Annotated, Any, cast, get_args
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi.responses import HTMLResponse
 
 from cv_matcher import __version__
 from cv_matcher.analysis import Provider, analyse_gap
@@ -49,6 +51,16 @@ app = FastAPI(
     description="Match a CV against a job description: score the fit and suggest improvements.",
     version=__version__,
 )
+
+
+@app.get("/", response_class=HTMLResponse, include_in_schema=False)
+def index() -> str:
+    """Serve the single-page upload UI.
+
+    Returns:
+        The HTML of ``static/index.html``.
+    """
+    return resources.files("cv_matcher.web").joinpath("static/index.html").read_text("utf-8")
 
 
 @app.get("/health")
