@@ -8,8 +8,8 @@ fit, and suggest targeted improvements.
 
 ## Current status
 
-**Document loading, skill extraction, match scoring, gap analysis and the
-`cv-match` CLI are in place.** You can extract and normalise text from CVs and
+**Document loading, skill extraction, match scoring, gap analysis, the
+`cv-match` CLI and a FastAPI web API with an upload page are in place.** You can extract and normalise text from CVs and
 job descriptions in PDF, DOCX, TXT and Markdown formats, extract skills from a
 curated taxonomy, compute an overall match score from skill overlap and text
 similarity, and get improvement suggestions. TF-IDF is the default similarity
@@ -18,9 +18,20 @@ backend; sentence-transformers embeddings are available through the optional
 offline rule-based analyser by default, or from any OpenAI-compatible endpoint
 when `OPENAI_API_KEY` is set.
 
+The web API (`POST /match`, `GET /health`) and a drag-and-drop upload page are
+provided by the optional `web` extra:
+
+```bash
+pip install -e ".[web]"
+uvicorn cv_matcher.web.app:app --reload
+```
+
+Then open <http://localhost:8000> for the upload page or
+<http://localhost:8000/docs> for the interactive API documentation. The default
+settings run fully offline.
+
 Coming next:
 
-- A small web app and API
 - Docker image and CI
 
 ## Requirements
