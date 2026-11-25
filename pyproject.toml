@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [{ name = "Mykhaylo Zhyhan" }]
-keywords = ["cv", "resume", "job-matching", "document-extraction", "nlp", "skills"]
+keywords = ["cv", "resume", "job-matching", "document-extraction", "nlp", "skills", "fastapi"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
@@ -29,7 +29,14 @@ dependencies = [
 
 [project.optional-dependencies]
 embeddings = ["sentence-transformers>=3.0"]
+web = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.27",
+    "python-multipart>=0.0.9",
+]
 dev = [
+    "cv-job-matcher[web]",
+    "httpx>=0.27",
     "mypy>=1.10",
     "pre-commit>=3.7",
     "pytest>=8.0",
@@ -49,6 +56,7 @@ include = ["cv_matcher*"]
 
 [tool.setuptools.package-data]
 cv_matcher = ["py.typed", "data/*.json"]
+"cv_matcher.web" = ["static/*"]
 
 [tool.ruff]
 line-length = 100
@@ -73,6 +81,7 @@ files = ["cv_matcher", "tests"]
 [tool.pytest.ini_options]
 testpaths = ["tests", "cv_matcher"]
 addopts = "-ra --doctest-modules"
+filterwarnings = ["ignore:Using `httpx` with `starlette.testclient`"]
 
 [tool.coverage.run]
 source = ["cv_matcher"]
